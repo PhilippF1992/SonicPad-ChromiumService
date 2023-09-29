@@ -1,0 +1,14 @@
+[Unit]
+Description=Chromium Dashboard
+
+[Service]
+Type=simple
+RestartSec=1
+User=USER
+Environment=DISPLAY=:0.0
+ExecStartPre=/usr/local/lib/chromium_service_pre_exec.sh
+ExecStart=/usr/bin/xinit /usr/bin/chromium --noerrdialogs --disable-infobars –start-fullscreen $URL -- -nocursor
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
