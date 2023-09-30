@@ -5,9 +5,10 @@ USER=$(whoami)
 echo "Update package data"
 sudo apt-get update
 sudo systemctl disable KlipperScreen
-sudo systemctl mask ModemManager.service
+sudo systemctl disable klipper
+sudo systemctl disable moonraker
 
-sudo apt install chromium unclutter xdotool -y
+sudo apt install chromium xdotool -y
 
 SERVICE_PRE_EXEC=$(<$INSTALLER_DIR/resources/chromium_service_pre_exec.sh)
 SERVICE_PRE_EXEC=$(sed "s/USER/$USER/g" <<< $SERVICE_PRE_EXEC)
@@ -20,7 +21,6 @@ sudo chmod +x /usr/local/lib/chromium_service_pre_exec.sh
 SERVICE=$(<$INSTALLER_DIR/resources/chromium.service)
 SERVICE=$(sed "s/USER/$USER/g" <<< $SERVICE)
 SERVICE=$(sed "s|CHROMIUM_URL|$CHROMIUM_URL|g" <<< $SERVICE)
-
 echo "$SERVICE" | sudo tee /etc/systemd/system/chromium.service > /dev/null
 sudo systemctl unmask chromium.service
 sudo systemctl daemon-reload
