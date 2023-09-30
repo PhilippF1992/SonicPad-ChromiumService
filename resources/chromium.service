@@ -7,7 +7,7 @@ RestartSec=1
 User=USER
 Environment=DISPLAY=:0.0
 ExecStartPre=/usr/local/lib/chromium_service_pre_exec.sh
-ExecStart=/usr/bin/xinit /usr/bin/chromium --noerrdialogs --disable-infobars –start-fullscreen $URL -- -nocursor
+ExecStart=/usr/bin/xinit /usr/bin/chromium --noerrdialogs --disable-infobars –start-fullscreen CHROMIUM_URL -- -nocursor
 Restart=always
 
 [Install]
